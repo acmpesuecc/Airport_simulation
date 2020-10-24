@@ -1,7 +1,7 @@
 #define MAX 3
 #define ARRIVE 0
 #define DEPART 1
-
+//fill up
 
 
 void initqueue(struct queue* pq)
@@ -14,12 +14,12 @@ void initqueue(struct queue* pq)
 
 void addqueue(struct queue* pq, struct plane* item)
 {
-    
+  //fill up  
 }
 struct plane* delqueue(struct queue* pq)
 {
     struct plane* p1 = malloc(sizeof(struct plane*));
-
+//fill up
 }
 
 int size(struct queue* q)
@@ -39,7 +39,7 @@ int full(struct queue* q)
 
 void initairport(struct airport* ap)
 {
-   ap = malloc(sizeof(struct airport*));
+   //fill up
 }
 
 void start(int* endtime, double* expectarrive, double* expectdepart)
@@ -113,7 +113,7 @@ void refuse(struct airport* ap, int action)
         printf("plane %d told to try later.\n\n", ap->pln.id);
         break;
     }
-    ()++;
+    ()++;//fillup
 }
 
 void land(struct airport* ap, struct plane* pl, int curtime)
@@ -175,7 +175,7 @@ int randomnumber(double expectedvalue)
         n++;
         x *= rand() / (double) RAND_MAX;
     }
-    return;
+    return;//fill up
 }
 
 void apaddqueue(struct airport* ap, char type)
