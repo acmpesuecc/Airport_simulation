@@ -2,12 +2,11 @@
 #define MAX 3
 #define ARRIVE 0
 #define DEPART 1
-
+#include "air_sim.h"
 
 void main()
 {
     srand(time(NULL));
-    struct airport *a = malloc(sizeof(struct airport*));
     int i, pri, curtime, endtime;
     double expectarrive, expectdepart;
     struct plane *temp;
