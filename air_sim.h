@@ -6,7 +6,7 @@
 #include <time.h>
 #include <limits.h>
 
-#define MAX 3
+#define MAX 15
 #define ARRIVE 0
 #define DEPART 1
 
