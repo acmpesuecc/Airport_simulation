@@ -1,4 +1,4 @@
-#define MAX 3
+#define MAX 20
 #define ARRIVE 0
 #define DEPART 1
 //fill up
