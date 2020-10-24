@@ -1,3 +1,4 @@
+#include "air_sim.h"
 #define MAX 3
 #define ARRIVE 0
 #define DEPART 1
@@ -11,8 +12,9 @@ void initqueue(struct queue* pq)
     pq->rear = -1;
 }
 
-void addqueue(struct queue* pq, struct plane item)
+void addqueue(struct queue* pq, struct plane item)//edited
 {
+    
     
 }
 struct plane delqueue(struct queue* pq)

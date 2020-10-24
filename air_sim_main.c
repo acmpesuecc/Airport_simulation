@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include "air_sim.h"
 #define MAX 3
 #define ARRIVE 0
 #define DEPART 1
