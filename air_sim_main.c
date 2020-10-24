@@ -7,10 +7,10 @@
 void main()
 {
     srand(time(NULL));
-    struct airport a;
+    struct airport *a = malloc(sizeof(struct airport*));
     int i, pri, curtime, endtime;
     double expectarrive, expectdepart;
-    struct plane temp;
+    struct plane *temp;
     int test;
     test = randomnumber(0.47);
     printf("%d", test);
