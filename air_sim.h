@@ -9,6 +9,7 @@
 #define MAX 3
 #define ARRIVE 0
 #define DEPART 1
+#define RAND_MAX 
 
 struct plane
 {
@@ -57,5 +58,4 @@ int apsize(struct airport , char );
 int apfull(struct airport , char );
 int apempty(struct airport , char );
 void myrandomize();
-
 
