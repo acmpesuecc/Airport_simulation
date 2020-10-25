@@ -9,7 +9,7 @@
 #define MAX 15
 #define ARRIVE 0
 #define DEPART 1
-#define RAND_MAX  1
+#define RAND_MAX
 
 struct plane
 {
