@@ -1,6 +1,7 @@
 #define MAX 15
 #define ARRIVE 0
 #define DEPART 1
+#include "air_sim.h"
 //fill up
 
 
@@ -24,16 +25,16 @@ struct plane* delqueue(struct queue* pq)
 
 int size(struct queue* q)
 {
-    return q.count;
+    return q->count;
 }
 
 int empty(struct queue* q)
 {
-    return (q.count <= 0);
+    return (q->count <= 0);
 }
 int full(struct queue* q)
 {
-    return (q.count >= MAX);
+    return (q->count >= MAX);
 }
 
 
@@ -120,8 +121,8 @@ void land(struct airport* ap, struct plane* pl, int curtime)
 {
     int wait;
 
-    wait = curtime - pl.tm;
-    printf("%d: Plane %d landed \n", curtime, pl.id);
+    wait = curtime - pl->tm;
+    printf("%d: Plane %d landed \n", curtime, pl->id);
     printf("in queue %d units \n\n", wait);
     (ap->nland)++;
     (ap->landwait) += wait;
@@ -131,8 +132,8 @@ void fly(struct airport* ap, struct plane* pl, int curtime)
 {
     int wait;
 
-    wait = curtime - pl.tm;
-    printf("%d: Plane %d took off \n", curtime, pl.id);
+    wait = curtime - pl->tm;
+    printf("%d: Plane %d took off \n", curtime, pl->id);
     printf("in queue %d units \n\n", wait);
     (ap->ntakeoff)++;
     (ap->takeoffwait) += wait;
@@ -183,11 +184,11 @@ void apaddqueue(struct airport* ap, char type)
     switch (tolower(type))
     {
     case'l':
-        addqueue(ap->pl, ap->pln);
+        addqueue(ap->pl, &(ap->pln));
         break;
 
     case't':
-        addqueue(ap->pt, ap->pln);
+        addqueue(ap->pt, &(ap->pln));
         break;
     }
 }
@@ -207,7 +208,7 @@ struct plane apdelqueue(struct airport* ap, char type)
         break;
     }
 
-    return p1;
+    return *p1;
 }
 
 int apsize(struct airport* ap, char type)
@@ -215,10 +216,10 @@ int apsize(struct airport* ap, char type)
     switch (tolower(type))
     {
     case'l':
-        return (size(*(ap.pl)));
+        return (size((ap->pl)));
 
     case't':
-        return (size(*(ap.pt)));
+        return (size((ap->pt)));
     }
 
     return 0;
@@ -229,10 +230,10 @@ int apfull(struct airport* ap, char type)
     switch (tolower(type))
     {
     case'l':
-        return (full(*(ap.pl)));
+        return (full(ap->pl));
 
     case't':
-        return (full(*(ap.pt)));
+        return (full(ap->pt));
     }
 
     return 0;
@@ -243,10 +244,10 @@ int apempty(struct airport* ap, char type)
     switch (tolower(type))
     {
     case'l':
-        return (empty(*(ap.pl)));
+        return (empty(ap->pl));
 
     case't':
-        return (empty(*(ap.pt)));
+        return (empty(ap->pt));
     }
 
     return 0;

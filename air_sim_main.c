@@ -10,6 +10,7 @@ void main()
     int i, pri, curtime, endtime;
     double expectarrive, expectdepart;
     struct plane *temp;
+    struct airport *a;
     int test;
     test = randomnumber(0.47);
     printf("%d", test);
@@ -42,14 +43,14 @@ void main()
 
         if (!(apempty(a, 'l')))
         {
-            temp = apdelqueue(&a, 'l');
+            *temp = apdelqueue(&a, 'l');
             land(&a, temp, curtime);
         }
         else
         {
             if (!(apempty(a, 't')))
             {
-                temp = apdelqueue(&a, 't');
+                *temp = apdelqueue(&a, 't');
                 fly(&a, temp, curtime);
             }
             else
