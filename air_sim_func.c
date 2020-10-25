@@ -2,6 +2,13 @@
 #define ARRIVE 0
 #define DEPART 1
 //fill up
+#include <conio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <math.h>
+#include <time.h>
+#include <limits.h>
+
 #include "air_sim.h"
 
 void initqueue(struct queue* pq)

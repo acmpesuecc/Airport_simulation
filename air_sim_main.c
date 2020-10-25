@@ -7,9 +7,10 @@
 void main()
 {
     srand(time(NULL));
+    struct airport a;
     int i, pri, curtime, endtime;
     double expectarrive, expectdepart;
-    struct plane *temp;
+    struct plane temp;
     int test;
     test = randomnumber(0.47);
     printf("%d", test);
@@ -24,7 +25,7 @@ void main()
         for (i = 1; i <= pri; i++)
         {
             newplane(&a, curtime, ARRIVE);
-            if (apfull(a, 'l'))
+            if (apfull(&a, 'l'))
                 refuse(&a, ARRIVE);
             else
                 apaddqueue(&a, 'l');
@@ -34,23 +35,23 @@ void main()
         for (i = 1; i <= pri; i++)
         {
             newplane(&a, curtime, DEPART);
-            if (apfull(a, 't'))
+            if (apfull(&a, 't'))
                 refuse(&a, DEPART);
             else
                 apaddqueue(&a, 't');
         }
 
-        if (!(apempty(a, 'l')))
+        if (!(apempty(&a, 'l')))
         {
             temp = apdelqueue(&a, 'l');
-            land(&a, temp, curtime);
+            land(&a, &temp, curtime);
         }
         else
         {
-            if (!(apempty(a, 't')))
+            if (!(apempty(&a, 't')))
             {
                 temp = apdelqueue(&a, 't');
-                fly(&a, temp, curtime);
+                fly(&a, &temp, curtime);
             }
             else
                 idle(&a, curtime);
