@@ -2,7 +2,7 @@
 #define ARRIVE 0
 #define DEPART 1
 //fill up
-
+#include "air_sim.h"
 
 void initqueue(struct queue* pq)
 {
@@ -12,28 +12,51 @@ void initqueue(struct queue* pq)
     pq->rear = -1;
 }
 
-void addqueue(struct queue* pq, struct plane* item)
+void addqueue(struct queue* pq, struct plane item)
 {
-  //fill up  
+  //fill up
+  if (pq->count >= MAX)
+    {
+        printf("\nTHE QUEUE IS FULL.\n");
+        return;
+    }
+    (pq->count)++;
+
+    pq->rear = (pq->rear + 1) % MAX;
+    pq->p[pq->rear] = item;
+  
+
 }
-struct plane* delqueue(struct queue* pq)
+struct plane delqueue(struct queue* pq)
 {
-    struct plane* p1 = malloc(sizeof(struct plane*));
-//fill up
+    struct plane p1;
+    if (pq->count <= 0)
+    {
+        printf("\nQueue is empty.\n");
+        p1.id = 0;
+        p1.tm = 0;
+    }
+    else
+    {
+        (pq->count)--;
+        p1 = pq->p[pq->front];
+        pq->front = (pq->front + 1) % MAX;
+    }
+    return p1;
 }
 
 int size(struct queue* q)
 {
-    return q.count;
+    return q->count;
 }
 
 int empty(struct queue* q)
 {
-    return (q.count <= 0);
+    return (q->count <= 0);
 }
 int full(struct queue* q)
 {
-    return (q.count >= MAX);
+    return (q->count >= MAX);
 }
 
 
@@ -113,10 +136,10 @@ void refuse(struct airport* ap, int action)
         printf("plane %d told to try later.\n\n", ap->pln.id);
         break;
     }
-    ()++;//fillup
+    (ap->nrefuse)++;//fillup
 }
 
-void land(struct airport* ap, struct plane* pl, int curtime)
+void land(struct airport* ap, struct plane pl, int curtime)
 {
     int wait;
 
@@ -127,7 +150,7 @@ void land(struct airport* ap, struct plane* pl, int curtime)
     (ap->landwait) += wait;
 }
 
-void fly(struct airport* ap, struct plane* pl, int curtime)
+void fly(struct airport* ap, struct plane pl, int curtime)
 {
     int wait;
 
@@ -175,7 +198,7 @@ int randomnumber(double expectedvalue)
         n++;
         x *= rand() / (double) RAND_MAX;
     }
-    return;//fill up
+    return n;//fill up
 }
 
 void apaddqueue(struct airport* ap, char type)
@@ -194,7 +217,7 @@ void apaddqueue(struct airport* ap, char type)
 
 struct plane apdelqueue(struct airport* ap, char type)
 {
-    struct plane* p1;
+    struct plane p1;
 
     switch (tolower(type))
     {
@@ -215,10 +238,10 @@ int apsize(struct airport* ap, char type)
     switch (tolower(type))
     {
     case'l':
-        return (size(*(ap.pl)));
+        return (size((ap->pl)));
 
     case't':
-        return (size(*(ap.pt)));
+        return (size((ap->pt)));
     }
 
     return 0;
@@ -229,10 +252,10 @@ int apfull(struct airport* ap, char type)
     switch (tolower(type))
     {
     case'l':
-        return (full(*(ap.pl)));
+        return (full((ap->pl)));
 
     case't':
-        return (full(*(ap.pt)));
+        return (full((ap->pt)));
     }
 
     return 0;
@@ -243,10 +266,10 @@ int apempty(struct airport* ap, char type)
     switch (tolower(type))
     {
     case'l':
-        return (empty(*(ap.pl)));
+        return (empty((ap->pl)));
 
     case't':
-        return (empty(*(ap.pt)));
+        return (empty((ap->pt)));
     }
 
     return 0;
