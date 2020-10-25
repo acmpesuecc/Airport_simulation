@@ -39,7 +39,7 @@ struct airport
 
 void initqueue(struct queue*);
 void addqueue(struct queue*, struct plane);
-struct plane delqueue(struct queue*);
+struct plane* delqueue(struct queue*);
 int size(struct queue q);
 int empty(struct queue q);
 int full(struct queue* q);

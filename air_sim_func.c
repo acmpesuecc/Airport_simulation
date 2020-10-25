@@ -28,14 +28,14 @@ void addqueue(struct queue* pq, struct plane item)
   
 
 }
-struct plane delqueue(struct queue* pq)
+struct plane* delqueue(struct queue* pq)
 {
-    struct plane p1;
+    struct plane* p1 = malloc(sizeof(struct plane*));
     if (pq->count <= 0)
     {
         printf("\nQueue is empty.\n");
-        p1.id = 0;
-        p1.tm = 0;
+        p1->id = 0;
+        p1->id = 0;
     }
     else
     {
@@ -64,6 +64,13 @@ int full(struct queue* q)
 void initairport(struct airport* ap)
 {
    //fill up
+   initqueue(&(ap->landing));
+   initqueue(&(ap->takeoff));
+
+    ap->pl = &(ap->landing);
+    ap->pt = &(ap->takeoff);
+    ap->nplanes = ap->nland = ap->ntakeoff = ap->nrefuse = 0;
+    ap->landwait = ap->takeoffwait = ap->idletime = 0;
 }
 
 void start(int* endtime, double* expectarrive, double* expectdepart)
